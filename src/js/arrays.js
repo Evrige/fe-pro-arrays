@@ -5,7 +5,9 @@
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function forEach(array, callback) {
-
+	for (let i = 0; i < array.length; i++) {
+		callback(array[i], i, array);
+	}
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -15,7 +17,11 @@ function forEach(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function map(array, callback) {
-
+	let result = [];
+	for (let i = 0; i < array.length; i++) {
+		result.push(callback(array[i], i, array));
+	}
+	return result;
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -25,7 +31,11 @@ function map(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function filter(array, callback) {
-
+	let result = [];
+	for (let i = 0; i < array.length; i++) {
+		if (callback(array[i], i, array) === true) result.push(array[i]);
+	}
+	return result;
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива, 3 аргумент изначальный вариант
@@ -38,8 +48,13 @@ function filter(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function reduce(array, callback, initialValue) {
-
+	let result = 0;
+	for (let i = 0; i < array.length; i++) {
+		result = callback(result, array[i], i, array);
+	}
+	return result;
 }
+
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
  вот документация https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
@@ -48,7 +63,9 @@ function reduce(array, callback, initialValue) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function some(array, callback) {
-
+	for (let i = 0; i < array.length; i++) {
+		if (callback(array[i], i, array) === true) return true;
+	}
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -58,15 +75,18 @@ function some(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function every(array, callback) {
-
+	for (let i = 0; i < array.length; i++) {
+		if (callback(array[i], i, array) === false) return false;
+	}
+	return true;
 }
 
 // Эту часть не удаляем, она важна для проверки результата
 module.exports = {
-  forEach,
-  map,
-  filter,
-  reduce,
-  some,
-  every,
+	forEach,
+	map,
+	filter,
+	reduce,
+	some,
+	every,
 };
