@@ -66,6 +66,7 @@ function some(array, callback) {
 	for (let i = 0; i < array.length; i++) {
 		if (callback(array[i], i, array) === true) return true;
 	}
+	return false;
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
